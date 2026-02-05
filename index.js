@@ -1,17 +1,16 @@
 import express from 'express'
-
+import userRouter from './routes/user.routes.js'
 const app = express();
 const PORT = 8080;
 
-app.use((req, res, next)=>{
-    const time = new Date().toLocaleTimeString();
-    console.log(`[${time}] ${req.method} request to ${req.url}`);
-    next();
-})
+app.use(express.json());
+
 
 app.get('/', (req, res)=> {
     res.send('home');
-})
+});
+
+app.use('/api/users', userRouter);
 
 app.listen(PORT, ()=>{
     console.log(`server listening at port ${PORT}`);
